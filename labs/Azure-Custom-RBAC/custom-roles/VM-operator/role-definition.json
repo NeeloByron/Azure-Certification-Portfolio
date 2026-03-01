@@ -1,0 +1,12 @@
+{
+  "Id": null,
+  "Description": "Can start, stop, and restart virtual machines but not create or delete them.",
+    "Microsoft.Compute/virtualMachines/deallocate/action",
+    "Microsoft.Compute/virtualMachines/vmSizes/read",
+  ],
+  "NotActions": [],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/00000000-0000-0000-0000-000000000000"
+}
