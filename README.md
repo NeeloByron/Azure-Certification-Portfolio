@@ -22,6 +22,9 @@ Azure-Administrator-Journey-AZ-104
 - [ ] Azure Compute (0%)
 - [ ] Identity & Governance (0%)
 
+## Hands Projects
+- ![azure-portal-users](https://user-images.githubusercontent.com/your-user-id/your-image-id.png)
+
 📚 Resources
 Microsoft Learn AZ-104
 
@@ -37,6 +40,7 @@ git clone https://github.com/YOUR-USERNAME/azure-az104-journey.git
 
 # Update repository
 git pull origin main
+
 
 
 
