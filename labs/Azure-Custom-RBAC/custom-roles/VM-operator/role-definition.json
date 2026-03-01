@@ -1,12 +1,22 @@
 {
+  "Name": "Virtual Machine Operator",
   "Id": null,
+  "IsCustom": true,
   "Description": "Can start, stop, and restart virtual machines but not create or delete them.",
+  "Actions": [
+    "Microsoft.Compute/virtualMachines/start/action",
+    "Microsoft.Compute/virtualMachines/restart/action",
     "Microsoft.Compute/virtualMachines/deallocate/action",
+    "Microsoft.Compute/virtualMachines/read",
+    "Microsoft.Compute/virtualMachines/powerOff/action",
     "Microsoft.Compute/virtualMachines/vmSizes/read",
+    "Microsoft.Network/networkInterfaces/read",
+    "Microsoft.Storage/storageAccounts/read"
   ],
   "NotActions": [],
   "DataActions": [],
   "NotDataActions": [],
   "AssignableScopes": [
     "/subscriptions/326a16fa-cf9a-44d4-97ee-ab727a79f3d8"
+  ]
 }
