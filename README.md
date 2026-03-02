@@ -1,45 +1,44 @@
-# Azure AZ-104 Certification Journey
-
-![Azure Administrator](https://img.shields.io/badge/Azure-AZ--104-0078D4)
-
-## 📋 Overview
-Repository tracking my progress towards Azure Administrator Associate (AZ-104) certification.
-
-## 🗂️ Repository Structure
-Azure-Administrator-Journey-AZ-104
-├── README.md # This file
-├── Study-Plan.md # Study timeline and goals
-├── Notes/ # Study notes by topic
-├── Labs/ # Hands-on lab exercises
-├── Practice-Exams/ # Practice questions & exams
-├── Scripts/ # Automation scripts for Azure
-└── Resources/ # Links, books, videos
-
-## 🎯 Current Progress
-- [ ] Azure Administration (40%)
-- [ ] Azure Networking (0%)
-- [ ] Azure Storage (0%)
-- [ ] Azure Compute (0%)
-- [ ] Identity & Governance (0%)
-
-## Hands Projects
-- ![azure-portal-users](https://user-images.githubusercontent.com/your-user-id/your-image-id.png)
-
-📚 Resources
-Microsoft Learn AZ-104
-
-Azure Free Account
-
-Azure Documentation
+# Azure Certification Journey
 
 
-## 🔧 Useful Commands
+> **Note:** I removed the `notes` and `practice-exams` folders to keep the repository focused on hands‑on work. Study notes are now kept in a private space, and practice exams are taken on external platforms.
+
+## 🏅 Certifications
+
+| Certification | Status | Badge |
+|---------------|--------|-------|
+| **AZ-900: Azure Fundamentals** | ✅ Completed | [![AZ-900](https://img.shields.io/badge/AZ--900-Completed-brightgreen)](https://www.credly.com/badges/...) |
+| **AZ-104: Azure Administrator** | 🚧 In Progress | [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-blue)](https://docs.microsoft.com/en-us/learn/certifications/azure-administrator/) |
+| **AZ-400: Azure DevOps Engineer** | ⏳ Planned | [![AZ-400](https://img.shields.io/badge/AZ--400-Planning-lightgrey)](https://docs.microsoft.com/en-us/learn/certifications/devops-engineer/) |
+
+*(Update the Credly link when you pass an exam.)*
+
+## 🔬 Hands‑On Labs & Projects
+
+### AZ‑104 Highlights
+- **[Azure AD Basics](./Azure-administrator/labs/Azure-ad-basics)** – CLI and PowerShell scripts to create users and groups; includes a screenshot of test users in the Azure portal.
+- **[Custom RBAC Roles](./Azure-administrator/projects/Azure-Custom-RBAC)** – JSON definition and assignment scripts for a “Virtual Machine Operator” custom role.
+- *More labs on networking, storage, and compute are planned.*
+
+### AZ‑400 (Planned)
+- CI/CD pipelines with Azure DevOps
+- Infrastructure as Code (ARM, Bicep, Terraform)
+- Monitoring and feedback loops
+
+## 📚 Resources
+
+- [Microsoft Learn: AZ-104](https://docs.microsoft.com/en-us/learn/certifications/azure-administrator/)
+- [Microsoft Learn: AZ-400](https://docs.microsoft.com/en-us/learn/certifications/devops-engineer/)
+- [John Savill’s Exam Cram (YouTube)](https://www.youtube.com/watch?v=VO8_Rk0dYqM)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+
+## 🚀 Getting Started
+
+Clone the repository and explore the folders:
+
 ```bash
-# Clone this repository
-git clone https://github.com/YOUR-USERNAME/azure-az104-journey.git
-
-# Update repository
-git pull origin main
+git clone https://github.com/NeeloByron/Azure-Certification-Portfolio.git
+cd Azure-Certification-Portfolio
 
 
 
