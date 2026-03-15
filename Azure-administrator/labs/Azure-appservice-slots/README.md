@@ -1,0 +1,1 @@
+Azure appservice slots
