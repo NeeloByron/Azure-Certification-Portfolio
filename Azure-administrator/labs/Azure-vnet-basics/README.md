@@ -23,3 +23,43 @@ By the end of this lab, you will have a clear understanding of network segmentat
 
 ## Architecture
 
+[Internet]
+v
++---------------------------+
+| Frontend Subnet |
+| (10.0.1.0/24) |
+| (Web/App Servers) |
++---------------------------+
+| (Internal Traffic)
+v
++---------------------------+
+| Backend Subnet | <--- Associated with: Network Security Group (NSG)
+| (10.0.2.0/24) |
+| (Database/Internal Servers)| <--- NSG Rule Example: Allow SSH only from Frontend Subnet
++---------------------------+
+
+
+**Explanation**:
+2.  The backend subnet is for resources that should be isolated. To enforce this isolation, you will associate an NSG with this subnet [citation:2].
+## Step-by-Step Instructions
+
+### 1. Set Up Environment Variables
+
+To make the commands easier to run and reusable, define the following variables in your terminal.
+```bash
+# Resource Group
+resourceGroup="rg-vnet-basics"
+location="eastus"
+
+# Virtual Network
+vnetName="app-vnet"
+vnetAddressPrefix="10.0.0.0/16"
+
+# Subnets
+frontendSubnetName="frontend"
+frontendSubnetPrefix="10.0.1.0/24"
+backendSubnetName="backend"
+backendSubnetPrefix="10.0.2.0/24"
+
+# Network Security Group
+nsgName="backend-nsg"
