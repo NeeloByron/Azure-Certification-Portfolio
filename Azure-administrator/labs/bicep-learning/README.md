@@ -1,1 +1,1 @@
-Deploy resource group + storage account with Bicep
+#Deploy resource group + storage account with Bicep
