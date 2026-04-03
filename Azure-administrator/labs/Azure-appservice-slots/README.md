@@ -1,39 +1,34 @@
-# Azure App Service Slots Lab
+# Azure App Service Slots – Web App with Staging Slot and Swap
+Deployment slots allow you to test a new version of your web app in a staging environment before swapping it into production with zero downtime. This lab demonstrates how to create a web app with a staging slot, deploy different content to each slot, and perform a swap.
 
-## Overview
+- Create an App Service plan (Standard tier or higher, required for slots).
+- Create a production web app and a staging slot.
+- Deploy a simple HTML page to both slots.
+- Perform a slot swap to promote staging to production.
+- Swap back to rollback instantly.
 
-This lab demonstrates how to use **deployment slots** in Azure App Service to implement **zero-downtime deployments** and **instant rollback**. You will:
+## Architecture
 
-- Create an Azure Web App with a production slot.
-- Deploy an initial version of a simple website.
-- Create a **staging** deployment slot.
-- Deploy an updated version of the website to the staging slot.
-- Perform a **slot swap** to promote the new version to production without any downtime.
-- Verify the swap and then swap back to simulate an instant rollback.
+[Internet] → [Production Slot] ← (swap) → [Staging Slot]
 
-This pattern (often called **blue-green deployment**) is a critical skill for any cloud administrator or DevOps engineer, as it minimises deployment risks and ensures high availability.
 
-## Prerequisites
 
-- An active **Azure subscription** (free trial works).
-- **Azure CLI** installed and logged in (`az login`).
-- Basic familiarity with the command line.
+- Azure subscription (Contributor or Owner)
+- Azure CLI installed and logged in (`az login`)
 
-## Step‑by‑Step Instructions
+## Deployment
 
-We will use Azure CLI commands. You can also perform these steps in the Azure portal, but using CLI allows you to automate the entire process.
+### Automated Script
 
-### 1. Set Up Variables and Resource Group
+The `deploy.sh` script does everything for you:
 
-Choose a unique name for your app (the `$RANDOM` adds randomness to avoid name conflicts).
+1. Creates a resource group and App Service plan (Standard S1).
+3. Deploys a "version 1" HTML page to production.
+4. Deploys a "version 2" HTML page to staging.
+5. Swaps staging into production.
+6. Displays the URLs for both slots so you can verify.
+Run:
 
 ```bash
-# Variables
-resourceGroup="rg-appservice-slots"
-location="eastus"
-appName="mywebapp$RANDOM"
-appServicePlan="asp-$appName"
-
-# Create resource group
-az group create --name $resourceGroup --location $location
-
+chmod +x deploy.sh
+./deploy.sh
