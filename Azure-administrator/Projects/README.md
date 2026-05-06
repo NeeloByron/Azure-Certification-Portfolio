@@ -1,40 +1,61 @@
-# Azure Advanced Projects
+# Advanced Projects
 
-This folder contains my most complex Azure projects, each designed to demonstrate deep technical skills and real‑world scenarios. These projects are part of my AZ‑104 certification journey and are intended to showcase my ability to design, deploy, and manage sophisticated Azure solutions.
+For focused single-topic labs, see the [`/labs`](../labs/) folder.
 
-## 📁 Project List
+---
 
-- **azure-storage-advanced** – ARM/Bicep template that deploys a secure storage account with private endpoint, lifecycle management rules, and geo‑replication. *(Key technologies: Bicep, ARM, Private Endpoints, Lifecycle Policies)*
+## 🗄️ Azure Storage Advanced
 
-- **azure-aks-multicontainer** – Deploys a multi‑container voting application on Azure Kubernetes Service (AKS) with an Azure Load Balancer and includes an architecture diagram. *(Key technologies: AKS, Docker, Kubernetes, Azure Load Balancer)*
+Secure storage deployment with private endpoint, lifecycle management rules,
+and geo-replication — fully defined in Bicep.
 
-- **azure-hub-spoke** – Builds a complete hub‑spoke network topology with Azure Firewall, route tables, VNet peering, and a detailed architecture diagram, all defined in Bicep. *(Key technologies: Bicep, Hub‑Spoke, Azure Firewall, VNet Peering)*
+`Bicep` `Private Endpoints` `Lifecycle Policies` `Geo-Replication` `ARM`
 
-- **azure-monitor-labs** – Configures diagnostic settings for Azure resources, creates log alerts based on KQL queries, and sets up action groups for notifications. *(Key technologies: Azure Monitor, Log Analytics, KQL, Action Groups)*
+📁 [View project](./Azure-storage-advanced/)
 
-- **azure-full-app** – Deploys a multi‑tier application (web app + database) with VNet integration, private endpoints, and end‑to‑end monitoring, documented with a diagram and Bicep. *(Key technologies: App Service, SQL Database, Private Endpoints, Bicep, Azure Monitor)*
+---
 
-## 🧱 Folder Structure
+## ☸️ AKS Multicontainer
 
-Each project is contained in its own subfolder (named as above) with the following typical layout:
+Multi-container voting application deployed on Azure Kubernetes Service with
 
+`AKS` `Kubernetes` `Docker` `Azure Load Balancer` `YAML`
 
+📁 [View project](./Azure-aks-multicontainer/)
 
-## 🚀 Getting Started
+---
 
-To explore any project, navigate into its folder and read the project‑specific README for prerequisites and deployment steps.
+## 🌐 Hub-Spoke Network Topology
 
-Example:
-```bash
-cd azure-storage-advanced
-cat README.md
+Complete enterprise hub-spoke network built with Bicep — includes Azure Firewall,
+route tables, VNet peering across spokes, and a full architecture diagram.
 
+`Bicep` `Hub-Spoke` `Azure Firewall` `VNet Peering` `Route Tables`
 
-## 4. Save and exit nano
-- Press **Ctrl+O** (Write Out), then press **Enter** to confirm the filename.  
-- Press **Ctrl+X** to exit.
+📁 [View project](./Azure-hub-spoke/)
 
-## 5. Stage the README file
-```bash
-git add README.md
+---
 
+## 📈 Azure Monitor Labs
+
+Diagnostic settings configured for Azure resources, log alerts built on KQL queries,
+and action groups set up for automated notifications.
+
+`Azure Monitor` `Log Analytics` `KQL` `Action Groups` `Alerts`
+
+📁 [View project](./Azure-monitor-labs/)
+
+---
+
+## 🏗️ Azure Full App
+
+Multi-tier application (web app + database) with VNet integration, private endpoints,
+and end-to-end monitoring — deployed via a single main Bicep script with architecture diagram.
+
+`App Service` `Azure SQL` `Private Endpoints` `Bicep` `Azure Monitor` `VNet Integration`
+
+📁 [View project](./Azure-full-app/)
+
+---
+
+<sub>5 projects · All deployed on live Azure subscriptions · Last updated May 2026</sub>
