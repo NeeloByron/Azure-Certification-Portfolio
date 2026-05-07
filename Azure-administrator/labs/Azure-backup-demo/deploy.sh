@@ -1,106 +1,101 @@
 #!/bin/bash
-# Azure Backup Demo - Automated Setup
+set -e  # Exit immediately if any command fails
 
-
-# Variables
-resourceGroup="rg-backup-demo"
+# ─── Variables ────────────────────────────────────────────────────────────────
 location="eastus"
 vmName="testvm"
 vaultName="myRecoveryVault"
 adminUser="azureuser"
-retainUntil=$(date -d "+30 days" +%Y-%m-%d)  # Retention date for on-demand backup
+
 echo "=== Azure Backup Demo Setup ==="
 
-# Login check
-az account show > /dev/null 2>&1 || az login
+# ─── Login check ──────────────────────────────────────────────────────────────
+# ─── Step 1: Resource Group ───────────────────────────────────────────────────
+az group create \
+    --location $location \
+    --output none
 
-echo "1. Creating resource group $resourceGroup in $location..."
-az group create --name $resourceGroup --location $location
-echo "2. Creating a Linux VM ($vmName)..."
+# ─── Step 2: Linux VM ─────────────────────────────────────────────────────────
+echo "2. Creating Linux VM '$vmName'..."
 az vm create \
     --resource-group $resourceGroup \
-    --name $vmName \
     --image Ubuntu2204 \
     --admin-username $adminUser \
-    --generate-ssh-keys \
-    --public-ip-sku Standard
+    --public-ip-sku Standard \
+    --output none
 
-echo "3. Creating Recovery Services vault $vaultName..."
-    --resource-group $resourceGroup \
+echo "   VM '$vmName' created."
+# ─── Step 3: Recovery Services Vault ──────────────────────────────────────────
+echo "3. Creating Recovery Services vault '$vaultName'..."
+az backup vault create \
     --name $vaultName \
-    --location $location
+    --location $location \
+    --output none
 
-echo "4. Enabling backup on VM using default policy..."
+echo "   Vault '$vaultName' created."
+
+# ─── Step 4: Enable Backup on VM ──────────────────────────────────────────────
+echo "4. Enabling backup on VM '$vmName' using DefaultPolicy..."
     --resource-group $resourceGroup \
     --vault-name $vaultName \
     --vm $vmName \
-    --policy-name DefaultPolicy
+    --policy-name DefaultPolicy \
+    --output none
 
-echo "5. Taking an on-demand backup (retain until $retainUntil)..."
+echo "   Backup protection enabled."
+
+# ─── Step 5: On-Demand Backup ─────────────────────────────────────────────────
+echo "5. Triggering on-demand backup (retain until $retainUntil)..."
+jobId=$(az backup protection backup-now \
     --resource-group $resourceGroup \
-    --vault-name $vaultName \
     --container-name $vmName \
     --item-name $vmName \
     --retain-until $retainUntil \
-    --query name -o tsv)
+    --backup-management-type AzureIaasVM \
 
 echo "   Backup job started: $jobId"
-# Wait for backup job to succeed
+
+# ─── Poll job status ──────────────────────────────────────────────────────────
     status=$(az backup job show \
-        --resource-group $resourceGroup \
         --vault-name $vaultName \
         --name $jobId \
-        --query status -o tsv)
+        --query properties.status -o tsv)
+
     if [ "$status" == "Completed" ]; then
-        echo "   Backup completed."
+        echo "   ✅ Backup completed successfully."
+        break
     elif [ "$status" == "Failed" ]; then
-        echo "   Backup failed. Check Azure portal for details."
-        exit 1
+        echo "   ❌ Backup failed. Check the Azure portal for details."
     else
-        echo "   Backup status: $status. Waiting 30 seconds..."
-    fi
+        echo "   Status: $status — waiting 30 seconds..."
 done
 
-echo "6. Listing recovery points (latest):"
+# ─── Step 6: List Recovery Points ─────────────────────────────────────────────
+echo ""
+echo "6. Listing latest recovery point..."
 rpName=$(az backup recoverypoint list \
-    --resource-group $resourceGroup \
+    --vault-name $vaultName \
     --container-name $vmName \
-    --item-name $vmName \
+    --backup-management-type AzureIaasVM \
     --query "[0].name" -o tsv)
 
-echo "   Latest recovery point name: $rpName"
+echo "   Latest recovery point: $rpName"
 
+# ─── Summary ──────────────────────────────────────────────────────────────────
 echo ""
-echo "=== Setup Complete ==="
 echo "Resources created:"
-echo "  - Resource group: $resourceGroup"
-echo "  - VM: $vmName"
-echo "  - Recovery Services vault: $vaultName"
+echo "  Resource group : $resourceGroup"
+echo "  VM             : $vmName"
+echo "  Vault          : $vaultName"
+echo "  Recovery point : $rpName"
 echo ""
 echo "To perform a file-level restore:"
-echo "  1. Create a storage account (for staging the recovery disk):"
-echo "  2. Trigger file restore:"
-echo "       az backup restore restore-files \\"
-echo "           -g $resourceGroup --vault-name $vaultName \\"
-echo "           --target-vm-name $vmName \\"
-echo ""
-echo "  3. Follow instructions from the Azure portal to mount the recovery disk and copy files."
-echo "To delete all resources when done:"
-echo "   az group delete --name $resourceGroup --yes --no-wait"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+echo "  1. Go to Azure Portal → Recovery Services Vault → Backup Items"
+echo "  2. Select '$vmName' → File Recovery"
+echo "  3. Choose a recovery point and download the recovery script"
+echo "  4. Run the script on the VM to mount the recovery disk"
+echo "  5. Copy your files from the mounted volume"
+echo "To clean up all resources when done:"
 
 
 
