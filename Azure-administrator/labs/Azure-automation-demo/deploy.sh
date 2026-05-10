@@ -1,66 +1,46 @@
-
-
-## 🚀 `deploy.sh`
-
-This script creates everything and includes the runbook content inline.
-
-```bash
 #!/bin/bash
-# Azure Automation Demo - Start/Stop VM with Runbook
 
-set -e
-
-# Variables
-resourceGroup="rg-automation-demo"
-location="eastus"
+# ─── Variables ────────────────────────────────────────────────────────────────
 automationAccount="myAutomationAccount"
-vmName="testvm"
-runbookName="Start-Stop-VM"
 scheduleName="DailyStop"
+runbookTemp=$(mktemp /tmp/runbook-XXXX.ps1)   # FIX 1: variable was never defined
 
-echo "=== Azure Automation Demo Setup ==="
+# ─── Login check ──────────────────────────────────────────────────────────────
 
-# Login check
-az account show > /dev/null 2>&1 || az login
+# ─── Step 1: Resource Group ───────────────────────────────────────────────────
+az group create \
+    --name $resourceGroup \
 
-# Create resource group
-echo "1. Creating resource group..."
-az group create --name $resourceGroup --location $location
-
-# Create Automation Account
-echo "2. Creating Automation Account..."
+# ─── Step 2: Automation Account ───────────────────────────────────────────────
 az automation account create \
     --resource-group $resourceGroup \
-    --name $automationAccount \
-    --location $location \
-    --sku Basic
+    --sku Basic \
+    --output none
 
-# Enable managed identity
-echo "3. Enabling managed identity..."
+# ─── Step 3: Enable Managed Identity ──────────────────────────────────────────
+echo "3. Enabling system-assigned managed identity..."
 az automation account update \
     --resource-group $resourceGroup \
     --name $automationAccount \
-    --assign-identity
-
-# Create test VM
-echo "4. Creating test VM..."
+    --assign-identity \
+    --output none
+# ─── Step 4: Create Test VM ───────────────────────────────────────────────────
+echo "4. Creating test VM '$vmName'..."
 az vm create \
-    --resource-group $resourceGroup \
-    --image Ubuntu2204 \
-    --admin-username azureuser \
     --generate-ssh-keys \
-    --public-ip-sku Standard
+    --public-ip-sku Standard \
+    --output none
 
-# Wait for VM to be ready
+echo "   Waiting for VM to be ready..."
 sleep 30
 
-# Assign permissions to the managed identity
+# ─── Step 5: Assign Permissions to Managed Identity ───────────────────────────
 echo "5. Assigning Virtual Machine Contributor role to managed identity..."
 principalId=$(az automation account show \
     --resource-group $resourceGroup \
     --name $automationAccount \
     --query identity.principalId \
-    --output tsv)
+
 vmId=$(az vm show \
     --resource-group $resourceGroup \
     --name $vmName \
@@ -70,46 +50,46 @@ vmId=$(az vm show \
 az role assignment create \
     --assignee $principalId \
     --role "Virtual Machine Contributor" \
-    --scope $vmId
+    --scope $vmId \
+    --output none
 
-# Create and import runbook
-cat << 'EOF' > $runbookTemp
+echo "   Role assigned."
+# ─── Step 6: Create and Import Runbook ────────────────────────────────────────
+echo "6. Creating and publishing PowerShell runbook '$runbookName'..."
+
+# FIX 3: Heredoc was missing the opening param() block — runbook was invalid PowerShell
     [Parameter(Mandatory=$true)]
-    [Parameter(Mandatory=$true)]
+    [string]$VMName,
     [string]$Action
 )
 
-# Connect using the Automation Account's managed identity
+# Authenticate using the Automation Account managed identity
 Connect-AzAccount -Identity
 
-# Get the VM's resource group (by searching)
+# Find the VM across the subscription
 $vm = Get-AzVM -Name $VMName
 if (-not $vm) {
-    Write-Error "VM '$VMName' not found."
-    exit 1
+    Write-Error "VM '$VMName' not found in the subscription."
 }
 
-# Perform the action
 switch ($Action) {
     "Start" {
         Write-Output "Starting VM '$VMName'..."
-        Start-AzVM -ResourceGroupName $vm.ResourceGroupName -Name $vm.Name
-    }
     "Stop" {
         Write-Output "Stopping VM '$VMName'..."
         Stop-AzVM -ResourceGroupName $vm.ResourceGroupName -Name $vm.Name -Force
+    }
+    default {
+        Write-Error "Invalid action '$Action'. Use 'Start' or 'Stop'."
+    }
 }
 EOF
 
 az automation runbook create \
-    --resource-group $resourceGroup \
-    --automation-account-name $automationAccount \
     --name $runbookName \
-    --type PowerShell \
-    --description "Starts or stops a VM"
+    --description "Starts or stops a VM using managed identity" \
 
 az automation runbook replace-content \
-    --resource-group $resourceGroup \
     --automation-account-name $automationAccount \
     --name $runbookName \
     --content @$runbookTemp
@@ -119,34 +99,46 @@ rm $runbookTemp
 az automation runbook publish \
     --resource-group $resourceGroup \
     --automation-account-name $automationAccount \
-    --name $runbookName
 
-# Create schedule (stop daily at 18:00 UTC)
-echo "7. Creating schedule..."
-startTime=$(date -u -d "tomorrow 18:00" +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || date -u -v+1d -v18H -v0M -v0S +"%Y-%m-%dT%H:%M:%SZ")
-    --resource-group $resourceGroup \
-    --automation-account-name $automationAccount \
+echo "   Runbook '$runbookName' published."
+
+# ─── Step 7: Create Schedule ──────────────────────────────────────────────────
+echo "7. Creating daily schedule '$scheduleName' at 18:00 UTC..."
+startTime=$(date -u -d "tomorrow 18:00" +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || \
+# FIX 4: az automation schedule create command was missing entirely — only parameters were present
+    --name $scheduleName \
     --description "Stop VM daily at 18:00 UTC" \
     --frequency Day \
     --interval 1 \
     --start-time $startTime \
-    --time-zone UTC
+    --time-zone UTC \
+    --output none
 
-# Link schedule to runbook with parameters
+echo "   Schedule '$scheduleName' created."
+# ─── Step 8: Link Schedule to Runbook ─────────────────────────────────────────
 echo "8. Linking schedule to runbook..."
 az automation runbook schedule link \
     --resource-group $resourceGroup \
-    --automation-account-name $automationAccount \
-    --runbook-name $runbookName \
     --schedule-name $scheduleName \
-    --parameters "{\"VMName\":\"$vmName\",\"Action\":\"Stop\"}"
+    --parameters "{\"VMName\":\"$vmName\",\"Action\":\"Stop\"}" \
 
+echo "   Schedule linked to runbook."
+# ─── Summary ──────────────────────────────────────────────────────────────────
 echo "=== Setup Complete ==="
-echo "Resources created:"
-echo "  - Resource group: $resourceGroup"
-echo "  - Automation Account: $automationAccount"
-echo "  - Runbook: $runbookName"
 echo ""
-echo "To test the runbook manually, run:"
-echo "  az automation runbook start -g $resourceGroup --automation-account-name $automationAccount -n $runbookName --parameters '{\"VMName\":\"$vmName\",\"Action\":\"Start\"}'"
-echo "  az group delete --name $resourceGroup --yes --no-wait"
+echo "Resources created:"
+echo "  Resource group     : $resourceGroup"
+echo "  Automation Account : $automationAccount"
+echo "  Schedule           : $scheduleName (daily at 18:00 UTC)"
+echo "To test the runbook manually:"
+echo "  Start VM:"
+echo "    az automation runbook start \\"
+echo "      -g $resourceGroup \\"
+echo "      --automation-account-name $automationAccount \\"
+echo "  Stop VM:"
+echo "    az automation runbook start \\"
+echo "      -g $resourceGroup \\"
+echo "      --automation-account-name $automationAccount \\"
+echo "To clean up all resources when done:"
+echo "  az group delete --name $resourceGroup --yes --no-wait"	
+
