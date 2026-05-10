@@ -187,17 +187,6 @@ az group delete --name rg-automation-demo --yes --no-wait
 
 ---
 
-## 📸 Screenshots
-
-| Screenshot | Description |
-|---|---|
-| `01-automation-account.png` | Automation Account created in portal |
-| `02-managed-identity.png` | System-assigned identity enabled |
-| `03-runbook-published.png` | PowerShell runbook published |
-| `04-schedule-linked.png` | Daily schedule linked to runbook |
-| `05-job-output.png` | Runbook job output showing VM stopped |
-
----
 
 ## 💡 Key Takeaways
 
