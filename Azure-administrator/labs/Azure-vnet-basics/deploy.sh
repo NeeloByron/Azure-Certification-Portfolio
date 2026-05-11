@@ -70,3 +70,4 @@ az vm create \
 
 # Get BackendVM Public IP
 az vm show -d -g $resourceGroup -n BackendVM --query publicIps -o tsv
++Azure Network Peerping lab(to-do)
