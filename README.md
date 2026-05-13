@@ -1,106 +1,128 @@
-# Azure Administrator (AZ-104) — Projects & Labs
+<div align="center">
 
-Hands-on labs and projects mapped to the official [AZ-104 exam objectives](https://learn.microsoft.com/en-us/certifications/resources/study-guides/az-104).
-Every entry includes deployment scripts, configurations, and portal screenshots.
+# ☁️ Azure Cloud Portfolio — Neelo Byron Nkhuna
 
----
+[![AZ-900](https://img.shields.io/badge/AZ--900-Certified_Feb_2026-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white)](https://www.credly.com/users/neelo-nkhuna)
+[![AZ-104](https://img.shields.io/badge/AZ--104-In_Progress-orange?style=flat-square&logo=microsoft-azure&logoColor=white)](https://learn.microsoft.com/en-us/certifications/azure-administrator/)
+[![Location](https://img.shields.io/badge/📍-Johannesburg,_ZA-lightgrey?style=flat-square)](https://www.linkedin.com/in/neelo-nkhuna-ba2b9b115/)
 
-## 📂 Structure
-
-```
-Azure-administrator/
-├── Projects/    ← Full end-to-end deployments with automated scripts
-└── labs/        ← Focused labs covering individual exam topics
-```
+</div>
 
 ---
 
-## 📊 Coverage at a Glance
+## 👋 About This Portfolio
 
-| AZ-104 Objective | Labs Completed |
+I'm **Neelo Byron Nkhuna**, a self-taught aspiring Cloud Engineer based in Johannesburg, South Africa. This repository documents my complete Azure certification journey every lab, project, script, and concept I've worked through on the path to becoming a cloud professional.
+
+Every folder here represents real hands-on work done on **live Azure subscriptions**: deployed virtual machines, configured networks, automated resources with Bicep and PowerShell, secured identities with Entra ID, and monitored infrastructure with Azure Monitor and Sentinel.
+
+🎯 **Currently pursuing:** Microsoft Certified — Azure Administrator Associate (AZ-104)
+
+---
+
+## 🗂️ Repository Structure
+
+```
+Azure-Certification-Portfolio/
+├── 📁 Azure-administrator/
+│   ├── 📁 Identity/          Entra ID, RBAC, Policy, Cost Tags
+│   ├── 📁 Storage/           Blob Storage, SAS, Lifecycle, Private Endpoints
+│   ├── 📁 Compute/           VMs, Availability Sets, VMSS, ACI, App Service
+│   ├── 📁 Networking/        VNet, VPN, Firewall, Load Balancer
+│   ├── 📁 Monitoring/        Azure Monitor, Sentinel, Backup, Automation
+│   ├── 📁 IaC/               Bicep templates
+│   └── 📁 Projects/          End-to-end advanced deployments
+└── 📄 README.md              This file
+```
+
+---
+
+## 🏅 Certifications
+
+Full details → [/Azure-administrator](./Azure-administrator/)
+
+| Badge | Domain | Status |
+|---|---|---|
+| ![AZ-900](https://img.shields.io/badge/AZ--900-Azure_Fundamentals-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white) | Cloud Fundamentals | ✅ Feb 2026 |
+| ![AZ-104](https://img.shields.io/badge/AZ--104-Azure_Administrator-orange?style=flat-square&logo=microsoft-azure&logoColor=white) | Cloud Administration | 🔄 In Progress |
+
+---
+
+## 🧪 Labs
+
+Full lab notes and screenshots → [/Azure-administrator](./Azure-administrator/)
+
+**21 hands-on labs across 6 domains:**
+
+| Domain | Labs Completed |
 |---|---|
-| 1 — Identity & Governance | 4 |
-| 2 — Storage | 3 |
-| 3 — Compute | 6 |
-| 4 — Networking | 5 |
-| 5 — Monitoring & Maintenance | 4 |
-| Advanced / Capstone | 2 |
-| **Total** | **24** |
+| 🔐 Identity | Entra ID · Custom RBAC · Azure Policy · Resource Tags |
+| 🗄️ Storage | Storage Basics · SAS Tokens · Lifecycle & Private Endpoints |
+| 💻 Compute | VM Deploy · Availability Sets · VMSS Autoscale · App Service Slots · ACI |
+| 🌐 Networking | VNet & Subnets · VPN P2S · Azure Firewall · Load Balancer |
+| 📈 Monitoring | Azure Monitor · Microsoft Sentinel · Azure Backup · Automation Runbooks |
+| 🏗️ IaC | Bicep Templates |
 
 ---
 
-## 🔐 Objective 1 — Identity & Governance
+## 🛠️ Projects
 
-| Lab | Description | Skills |
+Full project writeups → [/Azure-administrator/Projects](./Azure-administrator/Projects/)
+
+| Project | Description | Services |
 |---|---|---|
-| [Azure AD Basics](./labs/Azure-ad-basics/) | Create users and groups via Azure CLI & PowerShell | `Entra ID` `CLI` `PowerShell` |
-| [Custom RBAC — VM Operator](./labs/Azure-Custom-RBAC/) | Author and assign a least-privilege custom role | `RBAC` `JSON` `PowerShell` |
-| [Policy Demos](./labs/Azure-policy-demos/) | Apply allowed-locations policy via script | `Azure Policy` `Governance` `CLI` |
-| [Cost Tags](./labs/Azure-cost-tags/) | Script to apply resource tags and create budget alerts | `Cost Management` `Tags` `Shell` |
+| 🌐 Hub-Spoke Topology | Enterprise network with firewall, route tables and peering | VNet · Firewall · Bicep |
+| ☸️ AKS Multicontainer | Multi-container voting app on Kubernetes with load balancer | AKS · Docker · YAML |
+| 📈 Azure Monitor Labs | Diagnostic settings, KQL log alerts, action groups | Monitor · Log Analytics · KQL |
+| 🗄️ Storage Advanced | Secure storage with lifecycle management and private endpoint | Blob Storage · Bicep · Private Endpoint |
+| 🏗️ Azure Full App | Multi-tier app with VNet integration, private endpoints, monitoring | App Service · SQL · Bicep · Monitor |
 
 ---
 
-## 🗄️ Objective 2 — Storage
+## 🧰 Technical Skills
 
-| Lab | Description | Skills |
-|---|---|---|
-| [Storage Basics](./labs/Azure-storage-basics/) | Provision storage account, create container, upload blob | `Blob Storage` `Azure CLI` |
-| [Storage Advanced](./Projects/Azure-storage-advanced/) | Lifecycle management and private endpoint using Bicep | `Bicep` `Lifecycle Policies` `Private Endpoint` |
-| [Storage SAS](./labs/Azure-storage-sas/) | Generate and test Shared Access Signatures | `SAS Tokens` `Access Control` `Security` |
+**Azure Services**
 
----
+![VMs](https://img.shields.io/badge/Virtual_Machines-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white)
+![VNet](https://img.shields.io/badge/Virtual_Networks-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white)
+![Storage](https://img.shields.io/badge/Blob_Storage-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white)
+![Entra](https://img.shields.io/badge/Entra_ID-0089D6?style=flat-square&logo=microsoft&logoColor=white)
+![AKS](https://img.shields.io/badge/AKS-0089D6?style=flat-square&logo=kubernetes&logoColor=white)
+![Monitor](https://img.shields.io/badge/Azure_Monitor-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white)
+![Firewall](https://img.shields.io/badge/Azure_Firewall-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white)
+![Sentinel](https://img.shields.io/badge/Sentinel-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white)
 
-## 💻 Objective 3 — Compute
+**Tools & Languages**
 
-| Lab | Description | Skills |
-|---|---|---|
-| [VM Simple](./labs/Azure-vm-simple/) | Deploy Linux/Windows VM with PowerShell | `Virtual Machines` `PowerShell` `CLI` |
-| [VM Availability](./labs/Azure-vm-availability/) | Configure availability sets and fault domains | `Availability Sets` `PowerShell` `HA` |
-| [VMSS Autoscale](./labs/Azure-vmss-autoscale/) | VM Scale Set with CPU-based autoscale rules | `VMSS` `Autoscale` `Monitoring` |
-| [App Service Slots](./labs/Azure-appservice-slots/) | Deployment slots for blue/green deployments | `App Service` `Deployment Slots` `PaaS` |
-| [ACI Hello](./labs/Azure-aci-hello/) | Run a container in Azure Container Instances | `ACI` `Containers` `Docker` |
-| [AKS Multicontainer](./Projects/Azure-aks-multicontainer/) | Deploy a multi-container voting app on AKS with load balancer | `AKS` `Kubernetes` `YAML` `Load Balancer` |
-
----
-
-## 🌐 Objective 4 — Networking
-
-| Lab | Description | Skills |
-|---|---|---|
-| [VNet Basics](./labs/Azure-vnet-basics/) | Create VNet, subnets, and peering between two networks | `VNet` `Subnets` `Peering` `Shell` |
-| [VPN Point-to-Site](./labs/Azure-vpn-p2s/) | Configure P2S VPN and connect a client | `VPN Gateway` `P2S` `Certificates` |
-| [Firewall Demo](./labs/Azure-firewall-demo/) | Deploy Azure Firewall with application rules | `Azure Firewall` `Network Rules` `Security` |
-| [Load Balancer](./labs/Azure-loadbalancer-demo/) | Configure a public load balancer across VMs | `Load Balancer` `Backend Pools` `Health Probes` |
-| [Hub-Spoke Topology](./Projects/Azure-hub-spoke/) | Enterprise hub-spoke network with automated deployment | `Hub-Spoke` `VNet Peering` `Shell` `Architecture` |
+![Bicep](https://img.shields.io/badge/Bicep-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white)
+![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white)
+![Shell](https://img.shields.io/badge/Bash-121011?style=flat-square&logo=gnu-bash&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
 
 ---
 
-## 📈 Objective 5 — Monitoring & Maintenance
+## 📈 Journey Progress
 
-| Lab | Description | Skills |
-|---|---|---|
-| [Monitor Labs](./Projects/Azure-monitor-labs/) | Diagnostic settings, log alerts, Log Analytics workspace | `Azure Monitor` `Log Analytics` `Alerts` |
-| [Sentinel Basics](./labs/Azure-sentinel-basics/) | Enable Microsoft Sentinel and connect a data source | `Sentinel` `SIEM` `Security` `Shell` |
-| [Backup Demo](./labs/Azure-backup-demo/) | Configure VM backup with Recovery Services Vault | `Azure Backup` `Recovery Vault` `Shell` |
-| [Automation Demo](./labs/Azure-automation-demo/) | PowerShell runbook to start/stop VMs on schedule | `Automation Account` `Runbooks` `PowerShell` |
-
----
-
-## 🚀 Advanced / Capstone Projects
-
-| Project | Description | Skills |
-|---|---|---|
-| [Azure Full App](./Projects/Azure-full-app/) | Full application deployment via main Bicep script | `Bicep` `IaC` `End-to-End Deployment` |
-| [Bicep Learning](./labs/bicep-learning/) | Progressive Bicep templates for Azure resource automation | `Bicep` `IaC` `ARM` `Automation` |
+```
+Azure Certification Journey
+│
+├── ✅ AZ-900 — Cloud Concepts & Fundamentals        Completed Feb 2026
+│
+├── AZ-104 — Azure Administrator Associate
+│   ├── ✅ Objective 1: Identity & Governance         4 labs complete
+│   ├── ✅ Objective 2: Storage                       3 labs complete
+│   ├── ✅ Objective 3: Compute                       5 labs complete
+│   ├── ✅ Objective 4: Networking                    4 labs complete
+│   ├── ✅ Objective 5: Monitoring & Maintenance      4 labs complete
+    └── 🎯 AZ-104 Exam                               [ Upcoming ]
 
 ---
 
-## 📚 Resources
+## 🤝 Let's Connect
 
-- [Microsoft Learn — AZ-104](https://learn.microsoft.com/en-us/certifications/azure-administrator/)
-- [AZ-104 Official Study Guide](https://learn.microsoft.com/en-us/certifications/resources/study-guides/az-104)
-- [John Savill's AZ-104 Exam Cram](https://www.youtube.com/@NTFAQGuy)
+I'm actively looking for **Junior Cloud Engineer** and **Cloud Support** opportunities in South Africa and open to remote roles.
 
----
-
-<sub>24 labs completed · All work done on live Azure subscriptions · Last updated May 2026</sub>
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/neelo-nkhuna-ba2b9b115/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NeeloByron)
