@@ -11,9 +11,9 @@ For full end-to-end projects, see the [`/Projects`](../Projects/) folder.
 
 | Lab | Description |
 |---|---|
-| [Azure-ad-basics](./Azure-ad-basics/) | Create users and groups in Entra ID via Azure CLI & PowerShell |
-| [Azure-Custom-RBAC](./Azure-Custom-RBAC/) | Custom "VM Operator" role definition (JSON) assigned at resource group scope |
-| [Azure-policy-demos](./Azure-policy-demos/) | Allowed-locations policy applied via script |
+| [azure-entra-id-basics](./azure-entra-id-basics/) | Create users and groups in Entra ID via Azure CLI & PowerShell |
+| [azure-custom-rbac](./azure-custom-rbac/) | Custom "VM Operator" role definition (JSON) assigned at resource group scope |
+| [azure-policy-basics](./azure-policy-basics/) | Allowed-locations policy applied via script |
 | [Azure-cost-tags](./Azure-cost-tags/) | Tag resources and create budget alerts with deploy.sh |
 
 ---
@@ -35,7 +35,7 @@ For full end-to-end projects, see the [`/Projects`](../Projects/) folder.
 | [Azure-vm-availability](./Azure-vm-availability/) | Configure availability sets and fault domains |
 | [Azure-vmss-autoscale](./Azure-vmss-autoscale/) | VM Scale Set with CPU-based autoscale rules |
 | [Azure-appservice-slots](./Azure-appservice-slots/) | Deployment slots for blue/green app deployments |
-| [Azure-aci-hello](./Azure-aci-hello/) | Run a container in Azure Container Instances |
+| [azure-aci-basics](./azure-aci-basics/) | Run a container in Azure Container Instances |
 
 ---
 
@@ -64,7 +64,7 @@ For full end-to-end projects, see the [`/Projects`](../Projects/) folder.
 
 | Lab | Description |
 |---|---|
-| [bicep-learning](./bicep-learning/) | Progressive Bicep templates for Azure resource automation |
+| [azure-bicep-basics](./azure-bicep-basics/) | Progressive Bicep templates for Azure resource automation |
 
 ---
 
