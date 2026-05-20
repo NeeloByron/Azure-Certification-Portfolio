@@ -10,10 +10,6 @@ This lab demonstrates how to configure a Point-to-Site (P2S) VPN connection to s
 - Azure CLI installed and logged in (`az login`)
 - A Windows machine for certificate generation and VPN client
 
-## Architecture
-
-
-
 ## Step-by-Step Instructions
 
 ### 1. Create Infrastructure (30‑45 min)
