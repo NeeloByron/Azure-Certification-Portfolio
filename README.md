@@ -117,6 +117,7 @@ Azure Certification Journey
 │   ├── ✅ Objective 4: Networking                    4 labs complete
 │   ├── ✅ Objective 5: Monitoring & Maintenance      4 labs complete
     └── 🎯 AZ-104 Exam                               [ Upcoming ]
+
 ```
 ---
 
